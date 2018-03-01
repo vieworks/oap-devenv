@@ -4,7 +4,10 @@ set -e
 
 function list_repos {
     local org=$1
-    curl --silent https://api.github.com/orgs/${org}/repos | jq -r .[].name
+    read -p "Github Login: " login
+    read -s -p "Password: " pass
+    echo ""
+    curl --silent -u ${login}:${pass} https://api.github.com/orgs/${org}/repos | jq -r .[].name
 }
 
 function clone_or_update_repos {
